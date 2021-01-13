@@ -127,8 +127,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Activate Django-Heroku.
-import django_heroku
-django_heroku.settings(locals())
+# import django_heroku
+# django_heroku.settings(locals())
 
 
 SERVER_KEY = "AAAAXvWZFpA:APA91bG7d5zKiFIxtN43x9209fUsT5ff5ypokRBF6Xj8xYB3f_Z2R6DN8PI7xHmN1OsHdukGXZBRUObjkvtHLVy93sALxfHhHKM4UCMHwzNuoj7NgyyU1Tx6phVAD9PdzJPGvJad2bAS"
