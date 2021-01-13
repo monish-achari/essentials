@@ -136,6 +136,11 @@
                           Delivered
                         </button>
                 {% endif %}
+                {% if delivered %}
+                <button class="btn btn-primary btn-block" onclick="invoice_fun()">
+                  INVOICE
+                </button>
+                {% endif %}
                 </div>
               </div>
             </div>
@@ -144,6 +149,22 @@
       </div>
       </div>
 
+<script>
+function invoice_fun(){
+  nowuiDashboard.showNotification('bottom','right','Invoice is preparing to download...!');
+  $.ajax({
+        url: '/invoice/{{order_id}}/{{sub_id}}/bill.pdf',
+        dataType: 'json',
+        success: function (data) {
+          if (data.file) {
+            window.open(data.file);
+          }
+        }
+      });
+    }
+  </script>
+  window.setTimeout(function() {window.location.href = '/invoice/{{order_id}}/{{sub_id}}/bill.pdf';},1000);
 
+</script>
 
 {% endblock %}
