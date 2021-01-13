@@ -1184,7 +1184,7 @@ def invoice_print(request,order_id,sub_id):
 	total_sum = sum([item.get('amount') for item in products_list])
 
 	template_data = {
-		"host":"http://gro-pro.herokuapp.com/",
+		"host":"http://15.206.79.229:8000/",
 		"order_id":order_id,
 		"payment":ordered_products.get('paymentMode'),
 		"name":address.get('name'),
