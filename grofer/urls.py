@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from products.views import *
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 handler404 = handler404
 handler500 = handler500
@@ -87,4 +90,4 @@ urlpatterns = [
     # path('print/invoice.pdf',invoice_print),
     path('invoice/<order_id>/<sub_id>/bill.pdf',invoice_print),
 
-]
+]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
