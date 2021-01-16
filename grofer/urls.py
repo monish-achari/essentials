@@ -1,4 +1,7 @@
-"""grofer URL Configuration
+"""
+sudo nohup /home/ubuntu/eenv/bin/python essentials/manage.py runserver 0.0.0.0:80 --insecure
+
+grofer URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/

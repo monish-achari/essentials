@@ -652,7 +652,7 @@ def update_obj_page(request,obj,uid):
 		all_products = dict(db.child("Product").get(token_id).val())
 		template_name = 'admin_panel/offer3_update.html'
 		if  request.method == 'POST':
-			offer_obj = db.child('Offers2').child(uid)
+			offer_obj = db.child('Offers3').child(uid)
 			data = request.POST
 			offer_dict = {
 			"Offer_Modified_Date":str(dt.datetime.now()),
@@ -761,7 +761,7 @@ def update_obj_page(request,obj,uid):
 			"WalletPercentageUsed":data.get('WalletPercentageUsed'),
 			"DeliveryChargesForOrder":data.get("DeliveryChargesForOrder"),
 			"MinimumAmountForaOrder":data.get("MinimumAmountForaOrder"),
-			"DeliveryTimeSlot":data.get('DeliveryTimeSlot'),
+			"DeliveryTimeSlot":int(data.get('DeliveryTimeSlot')),
 			"TotalMRPForUsingwallet":data.get('TotalMRPForUsingwallet'),
 			"MaximumwalletAmountForOrder":data.get('MaximumwalletAmountForOrder'),
 			"Offer_Modified_Date":str(dt.datetime.now()),
@@ -1184,7 +1184,7 @@ def invoice_print(request,order_id,sub_id):
 	total_sum = sum([item.get('amount') for item in products_list])
 
 	template_data = {
-		"host":"http://15.206.79.229:8000/",
+		"host":"http://15.206.79.229:80/",
 		"order_id":order_id,
 		"payment":ordered_products.get('paymentMode'),
 		"name":address.get('name'),
