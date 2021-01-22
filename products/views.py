@@ -1227,6 +1227,10 @@ def file_upload_to_firebase(order_id,sub_id,token_id,file_path):
 	if 'AppName' not in firebase_admin._apps:
 		cred = credentials.Certificate(cred_json)
 		initialize_app(cred, {'storageBucket': "essentials-e7555.appspot.com"},name="AppName")
+	else:
+		cred = credentials.Certificate(cred_json)
+		initialize_app(cred, {'storageBucket': "essentials-e7555.appspot.com"},name="AppName")
+		
 	fileName = file_path
 	bucket = storage.bucket()
 	blob = bucket.blob(fileName)
