@@ -1219,13 +1219,14 @@ def pdf_gen_new(pdfstr):
 	pdfkit.from_string(pdfstr, BASE_DIR+'/static/Invoice.pdf')
 	return '/static/Invoice.pdf' 
 
-
+import firebase_admin
 from firebase_admin import credentials, initialize_app, storage
 
 def file_upload_to_firebase(order_id,sub_id,token_id,file_path):
 	cred_json = BASE_DIR + "/crEdFilENoOneCanGuEsS78478883783FoldErName/cred.json"
-	cred = credentials.Certificate(cred_json)
-	initialize_app(cred, {'storageBucket': "essentials-e7555.appspot.com"})
+	if 'AppName' not in firebase_admin._apps:
+		cred = credentials.Certificate(cred_json)
+		initialize_app(cred, {'storageBucket': "essentials-e7555.appspot.com"},name="AppName")
 	fileName = file_path
 	bucket = storage.bucket()
 	blob = bucket.blob(fileName)
