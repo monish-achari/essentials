@@ -31,7 +31,7 @@
                 <!-- </div>
                 <div class="alert alert-primary"> -->
                   <span><b> Delivery Date :  </b> </span>
-                  <span><b> {{ordered_products.deliveryDate}} </b> </span>
+                  <span><b> {{ordered_products.orderTimeSlot}} </b> </span>
                 </div>
 
                 <div class="alert alert-primary">
@@ -136,11 +136,9 @@
                           Delivered
                         </button>
                 {% endif %}
-                {% if delivered %}
                 <button class="btn btn-primary btn-block" onclick="invoice_fun()">
                   INVOICE
                 </button>
-                {% endif %}
                 </div>
               </div>
             </div>

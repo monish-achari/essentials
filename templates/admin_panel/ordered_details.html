@@ -43,11 +43,9 @@
                       <th>
                         Status 
                       </th>
-                      {% if val_type == "delivered" %}
                       <th>
                         Invoice
                       </th>
-                      {% endif %}
                       <th class="text-right">
                         Details
                       </th>
@@ -81,7 +79,15 @@
                       <td><b>
                         {{val_n.orderStatus}}
                       </b></td>
-
+                      {% if val_n.invoice %}
+                      <td>
+                        <a style="background: green;" class="waves-effect waves-light btn" target="_blank" href="{{val_n.invoice}}" >View Invoice</a>
+                      </td>
+                      {% else %}
+                      <td>
+                        <a style="background: rgb(190, 82, 50);" class="waves-effect waves-light btn" target="_blank" href="/order/details/{{key}}/{{key_n}}/?delivered=true" >Generate Invoice</a>
+                      </td>
+                      {% endif %}
                         <td class="text-right">
                           <!--  href="/delivered/{{key}}/{{val.key}}/ -->
                           <!-- <a class="waves-effect waves-light btn" href="/delivered/{{key}}/{{val.key}}/ -->
@@ -170,7 +176,15 @@
                       <td><b>
                         {{val_n.orderStatus}}
                       </b></td>
-
+                      {% if val_n.invoice %}
+                      <td>
+                        <a style="background: green;" class="waves-effect waves-light btn" target="_blank" href="{{val_n.invoice}}" >View Invoice</a>
+                      </td>
+                      {% else %}
+                      <td>
+                        <a style="background: rgb(190, 82, 50);" class="waves-effect waves-light btn" target="_blank" href="/order/details/{{key}}/{{key_n}}/?delivered=true" >Generate Invoice</a>
+                      </td>
+                      {% endif %}
                         <td class="text-right">
                           <!--  href="/delivered/{{key}}/{{val.key}}/ -->
                           <!-- <a class="waves-effect waves-light btn" href="/delivered/{{key}}/{{val.key}}/ -->

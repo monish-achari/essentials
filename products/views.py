@@ -1195,7 +1195,7 @@ def invoice_print(request,order_id,sub_id):
 		"pincode":address.get('pincode'),
 		"phone":address.get('mobileNumber'),
 		"od":ordered_products.get('orderDate'),
-		"dd":ordered_products.get('deliveryDate'),
+		"dd":ordered_products.get('orderTimeSlot'),
 		"products":products_list,
 		"ed":"{:.2f}".format(ordered_products.get('essentialsDiscount')),
 		"dc":"{:.2f}".format(ordered_products.get('deliveryAmount')),
