@@ -282,7 +282,7 @@ def add_product(request):
 		grand_cat_name = all_grandcategories.get(product_grandcategory_id)
 		product_dict = {
 			"size":data.get('size'),
-			"Maximumquantityperuser":data.get("Maximum quantity per user"),
+			"Maximumquantityperuser":data.get("Maximumquantityperuser"),
 			"locations":data.getlist('locations'),
 			"color":data.get('color'),
 			"DealsOftheday":data.get('dofd'),
@@ -592,7 +592,7 @@ def update_obj_page(request,obj,uid):
 			grand_cat_name = all_grandcategories.get(product_grandcategory_id)
 			product_dict = {
 				"color":data.get('color'),
-				"Maximumquantityperuser":data.get("Maximum quantity per user"),
+				"Maximumquantityperuser":data.get("Maximumquantityperuser"),
 				"locations":data.getlist('locations'),
 				"size":data.get('size'),
 				"DealsOftheday":data.get('dofd'),
@@ -1210,9 +1210,32 @@ def invoice_print(request,order_id,sub_id):
 	# template_data = {"host":request.get_host()}
 	template = render_to_string('billing/invoice.html',template_data)
 	response = pdf_gen_new(template)
+	file_path = BASE_DIR+'/static/Invoice.pdf'
+	file_upload_to_firebase(order_id,sub_id,token_id,file_path)
 	return JsonResponse({"file":response})
 
 def pdf_gen_new(pdfstr):
 	import pdfkit
 	pdfkit.from_string(pdfstr, BASE_DIR+'/static/Invoice.pdf')
 	return '/static/Invoice.pdf' 
+
+
+from firebase_admin import credentials, initialize_app, storage
+
+def file_upload_to_firebase(order_id,sub_id,token_id,file_path):
+	cred_json = BASE_DIR + "/crEdFilENoOneCanGuEsS78478883783FoldErName/cred.json"
+	cred = credentials.Certificate(cred_json)
+	initialize_app(cred, {'storageBucket': "essentials-e7555.appspot.com"})
+	fileName = file_path
+	bucket = storage.bucket()
+	blob = bucket.blob(fileName)
+	blob.upload_from_filename(fileName)
+	blob.make_public()
+	# print("your file url", blob.public_url)
+	delivery_obj = db.child('User-Order-History').child(order_id).child(sub_id)
+	deli_dict = {
+		"invoice":blob.public_url
+	}
+	delivery_obj.update(deli_dict,token_id)
+	ordered_products = db.child("User-Order-History").child(order_id).child(sub_id).get(token_id).val()
+	return True
