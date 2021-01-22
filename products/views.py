@@ -1214,5 +1214,5 @@ def invoice_print(request,order_id,sub_id):
 
 def pdf_gen_new(pdfstr):
 	import pdfkit
-	pdfkit.from_string(pdfstr, 'static/Invoice.pdf')
+	pdfkit.from_string(pdfstr, BASE_DIR+'/static/Invoice.pdf')
 	return '/static/Invoice.pdf' 
