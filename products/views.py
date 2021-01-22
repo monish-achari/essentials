@@ -1224,17 +1224,9 @@ from firebase_admin import credentials, initialize_app, storage
 
 def file_upload_to_firebase(order_id,sub_id,token_id,file_path):
 	cred_json = BASE_DIR + "/crEdFilENoOneCanGuEsS78478883783FoldErName/cred.json"
-	try:
+	if (not len(firebase_admin._apps)):
 		cred = credentials.Certificate(cred_json)
-		initialize_app(cred, {'storageBucket': "essentials-e7555.appspot.com"})
-	except:
-		pass
-	# try:
-	# 	firebase_admin.delete_app('AppName')
-	# except:
-	# 	if 'AppName' not in firebase_admin._apps:
-	# 		cred = credentials.Certificate(cred_json)
-	# 		initialize_app(cred, {'storageBucket': "essentials-e7555.appspot.com"},name="AppName")	
+		initialize_app(cred, {'storageBucket': "essentials-e7555.appspot.com"})	
 	fileName = file_path
 	bucket = storage.bucket()
 	blob = bucket.blob(fileName)
