@@ -121,7 +121,9 @@ def login_page(request):
 		try:
 			user = auth.sign_in_with_email_and_password(email,passwd)
 			session_id = user['idToken']
+			session_email = user['email']
 			request.session['uid'] = session_id
+			request.session['email'] = session_email
 			message = "Login Succesfull"
 			return redirect('dashboard')
 		except:

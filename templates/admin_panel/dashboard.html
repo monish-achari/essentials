@@ -1,5 +1,6 @@
 {% extends "admin_panel/base.html" %}
 {% block midpart %}
+{% if request.session.email == 'chandan@gmail.com' %}
 <div class="main-panel" id="main-panel">
       <div class="panel-header panel-header-sm">
       </div>
@@ -99,5 +100,7 @@
     }
   }
   </script>
+{% endif %}
 
+<h2 style="padding-left: 300px;padding-top: 200px;">To add products please click on <a href="/prodcut/add/"><h4>HERE</h4></a></h2>
 {% endblock %}
