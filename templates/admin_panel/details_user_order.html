@@ -1,0 +1,102 @@
+{% extends "admin_panel/base.html" %}
+{% block midpart %}
+<div class="main-panel" id="main-panel">
+    <!-- Navbar -->
+    
+    <!-- End Navbar -->
+    <div class="panel-header panel-header-sm">
+    </div>
+<div class="content">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">User Order Details</h5>
+          </div>
+          <div class="card-body">
+            
+            <div class="alert alert-info">
+                <h6>Address: </h6>
+              {% for key,val in return_data.address.items  %}
+              <span><b> {{val.addressNickName }}</b><br> 
+                <b>House Number : {{val.houseNo }}</b><br>
+                <b>Society Name : {{val.societyName }}</b><br>
+                <b>Landmark : {{val.landmark }}</b><br>
+                <b>Pincode : {{val.pincode }}</b><br>
+                <b>Phone : {{val.mobileNumber }}</b><br>
+                </span>
+                {% endfor %}
+            </div>
+
+            <div class="alert alert-primary">
+                <span><b> Order Details:  </b> </span>
+            </div>
+            {% for key, val in new_user_order_details.items %}
+            <div class="alert alert-info">
+                <span>
+
+                    <b> <h5>{{ forloop.counter }}.</h5>  Order Address : </b><br> 
+                    <b>Name : {{val.addressModel.name}} </b><br>
+                    <b>Address Nick Name : {{val.addressModel.addressNickName}} </b><br>
+                    <b>House No : {{val.addressModel.houseNo}} </b><br>
+                    <b>Society Name : {{val.addressModel.societyName}} </b><br>
+                    <b>Landmark : {{val.addressModel.landmark}} </b><br>
+                    <b>Pincode : {{val.addressModel.pincode}} </b><br>
+                    <b>Mobile Number {{val.addressModel.mobileNumber}} </b><br>
+                    <br>    
+                    <b>Order Details : </b><br>
+                    <br>
+                    <b>Delivery Date : {{val.deliveryDate}} </b><br>
+                    <b>Order Time Slot : {{val.orderTimeSlot}} </b><br>
+                    <b>Essentials Discount : {{val.essentialsDiscount}} </b><br>
+                    <b>Normal Discount : {{val.normalDiscount}} </b><br>
+                    <b>Delivery Amount : {{val.deliveryAmount}} </b><br>
+                    <b>Sub Total: {{val.subtotal}} </b><br>
+                    <b>Total Mrp: {{val.totalMrp}} </b><br>
+                    <b>Payment Mode : {{val.paymentMode}} </b><br>
+                    {% if val.deliveryCancel %}
+                    <b>Reason For Cancellation: {{val.reasonForCancellation}} </b><br>
+                    {% endif %}
+                </span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-user">
+          <div class="image">
+            <img src="../assets/img/bg5.jpg" alt=" ">
+          </div>
+          <div class="card-body">
+            <div class="author">
+              <a href="#">
+                <img class="avatar border-gray" src="{{return_data.userImageUrl}}" alt="...">
+                <h5 class="title">{{return_data.Name}}</h5>
+              </a>
+              <p class="description">
+                <b>{{return_data.Email}} </b>
+              </p>
+            </div>
+            <p class="description text-center">
+                "Do what you can,<br>
+                with what you have, <br>
+                where you are.”
+            </p>
+          </div>
+          <hr>
+          <div class="button-container">
+            <div class="col-md-12">
+                    <!-- <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('bottom','right','User has been deleted...!');window.setTimeout(function() {window.location.href = '/delete/{{uid}}/user/dashboard/';},1000);">
+                      Delete User
+                      </button> -->
+                    <a class="btn btn-primary btn-block" href="/user/order/list/">Go To Order List 
+                    </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+{% endblock %}

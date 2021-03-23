@@ -1060,6 +1060,45 @@ def list_coupons(request):
 	all_coupons = dict(db.child('Coupons').get(token_id).val())
 	return render(request, template_name,locals())
 
+def list_user_order_list(request):
+	token_id = request.session['uid']
+	template_name = 'admin_panel/list_user_orders.html'
+	all_user_orders = dict(db.child('User-Order-History').get(token_id).val())
+	return render(request, template_name,locals())
+
+def detais_user_order(request,userid):
+	token_id = request.session['uid']
+	template_name = 'admin_panel/details_user_order.html'
+	user_obj = dict(db.child("Users").child(userid).get(token_id).val())
+	all_address = dict(db.child("User_Address").get(token_id).val())
+	user_address = all_address.get(userid)
+
+	return_data = {"Name":user_obj.get('userName'),"Email":user_obj.get('userEmail'),
+					"userImageUrl":user_obj.get('userImageUrl'),
+					"address":user_address # multiple address are there
+					}
+
+	user_order_details = dict(db.child('User-Order-History').child(userid).get(token_id).val())
+
+	new_user_order_details = {}
+	for k,v in user_order_details.items():
+		new_user_order_details.update({k:{"addressModel":json.loads(v.get("addressModel")),
+				"deliveryAmount":v.get("deliveryAmount"),
+				"deliveryDate":v.get("deliveryDate"),
+				"essentialsDiscount":v.get("essentialsDiscount"),
+				"normalDiscount":v.get("normalDiscount"),
+				"orderDate":v.get("orderDate"),
+				"orderStatus":v.get("orderStatus"),
+				"orderTimeSlot":v.get("orderTimeSlot"),
+				"paymentMode":v.get("paymentMode"),
+				"subtotal":v.get("subtotal"),
+				"totalMrp":v.get("totalMrp"),
+				"reasonForCancellation":v.get("reasonForCancellation"),
+				"deliveryCancel":v.get("deliveryCancel")
+				}})
+
+	return render(request, template_name,locals())
+
 
 def add_coupon(request):	
 	template_name = 'admin_panel/add_coupon.html'

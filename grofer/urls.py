@@ -84,6 +84,8 @@ urlpatterns = [
     path('cart/list/',list_carts, name='cartlist'),
     path('cart/details/<userid>/<cartid>/',detais_cart, name='cartlist'),
 
+    path('user/order/list/',list_user_order_list, name='list_user_order_list'),
+    path('user/order/<userid>/details/',detais_user_order, name='detais_user_order'),
 
     path('grand-category/list/',list_grand_subcategory, name='grandcategory'),
     path('grand-category/add/',add_grand_subcategory, name='grandcategoryadd'),
