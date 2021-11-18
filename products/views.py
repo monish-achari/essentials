@@ -1269,8 +1269,9 @@ def file_upload_to_firebase(order_id,sub_id,token_id,file_path):
 		cred = credentials.Certificate(cred_json)
 		initialize_app(cred, {'storageBucket': "essentials-e7555.appspot.com"})	
 	fileName = file_path
+	uuid_key = str(uuid.uuid4())
 	bucket = storage.bucket()
-	blob = bucket.blob(fileName)
+	blob = bucket.blob(uuid_key+"_INVOICE.pdf")
 	blob.upload_from_filename(fileName)
 	blob.make_public()
 	# print("your file url", blob.public_url)
